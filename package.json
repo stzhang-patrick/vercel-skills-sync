@@ -1,6 +1,6 @@
 {
   "name": "vercel-skills-sync",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Sync a team's GitHub skills repository using the Vercel Skills CLI",
   "type": "module",
   "license": "MIT",
