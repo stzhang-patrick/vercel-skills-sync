@@ -1,0 +1,33 @@
+name: Publish
+on:
+  push:
+    tags: ['v[0-9]*']
+permissions:
+  contents: read
+concurrency:
+  group: npm-publish-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: npm
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          registry-url: https://registry.npmjs.org
+      - name: Check release tag
+        run: node -e "const p=require('./package.json'); if(process.env.GITHUB_REF_NAME !== 'v'+p.version || !/^\d+\.\d+\.\d+$/.test(p.version)) throw Error('Release tag must match the stable package version')"
+      - name: Install npm with OIDC support
+        run: npm install --global npm@11 --ignore-scripts
+      - run: npm ci --ignore-scripts
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm pack --dry-run
+      - name: Publish to npm with provenance
+        run: npm publish --provenance --access public

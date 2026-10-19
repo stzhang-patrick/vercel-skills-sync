@@ -1,0 +1,55 @@
+{
+  "name": "vercel-skills-sync",
+  "version": "0.1.1",
+  "description": "Sync a team's GitHub skills repository using the Vercel Skills CLI",
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "vercel-skills-sync": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "src/vercel/UPSTREAM.md",
+    "README.md",
+    "README_ZH.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22.20.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "npm run build && node --test tests/*.test.ts",
+    "prepack": "npm run build"
+  },
+  "dependencies": {
+    "cli-table3": "0.6.5",
+    "skills": "1.7.2",
+    "yaml": "2.8.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.0",
+    "typescript": "5.9.3"
+  },
+  "keywords": [
+    "agent-skills",
+    "skills",
+    "cli",
+    "sync",
+    "github",
+    "codex",
+    "claude-code"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stzhang-patrick/vercel-skills-sync.git"
+  },
+  "homepage": "https://github.com/stzhang-patrick/vercel-skills-sync#readme",
+  "bugs": {
+    "url": "https://github.com/stzhang-patrick/vercel-skills-sync/issues"
+  }
+}
